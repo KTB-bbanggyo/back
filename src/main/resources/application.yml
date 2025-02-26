@@ -1,6 +1,10 @@
 spring:
+  config:
+    # application-secrets.yml 파일이 존재하면 자동으로 병합 (파일이 없으면 무시됨)
+    import: "optional:file:./application-secrets.yml"
+
   application:
-    name: baseback
+    name: paggyo
 
   datasource:
     url: jdbc:mysql://mysql:3306/mydb
@@ -16,3 +20,20 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: ${kakao.client.id}        # application-secrets.yml에서 로드
+            client-secret: ${kakao.client.secret}  # application-secrets.yml에서 로드
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope: account_email, profile_nickname, profile_image
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
