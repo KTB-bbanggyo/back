@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Users (
 );
 
 -- 빵집 정보 
-CREATE TABLE IF NOT EXISTS Bakeries (
+CREATE TABLE IF NOT EXISTS Bakery (
     bakery_id     BIGINT AUTO_INCREMENT PRIMARY KEY, 
     name          VARCHAR(255) NOT NULL, 
     address       VARCHAR(255) NOT NULL, 
@@ -32,12 +32,12 @@ CREATE TABLE IF NOT EXISTS Bakeries (
 
 
 -- 찜한 빵집 (마이페이지 - 찜.빵)
-CREATE TABLE IF NOT EXISTS Favorites (
+CREATE TABLE IF NOT EXISTS FavoriteBackery (
     user_id       BIGINT, 
     bakery_id     BIGINT, 
     PRIMARY KEY (user_id, bakery_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (bakery_id) REFERENCES Bakeries(bakery_id) ON DELETE CASCADE
+    FOREIGN KEY (bakery_id) REFERENCES Bakery(bakery_id) ON DELETE CASCADE
 );
 
 -- 로그인 세션 관리 (JWT 또는 세션 기반 인증)
@@ -49,4 +49,3 @@ CREATE TABLE IF NOT EXISTS Login_Sessions (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
- 
