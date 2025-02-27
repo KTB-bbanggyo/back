@@ -49,3 +49,35 @@ CREATE TABLE IF NOT EXISTS Login_Sessions (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
+-- 1. 사용자 데이터 삽입
+INSERT INTO Users (user_id, kakao_id, username, user_password, email, provider, nickname, profile_image, age_range, gender, llm_thread_id) VALUES
+(1, 123456789, 'kimchulsoo', 'hashed_password_1', 'chulsoo@example.com', 'LOCAL', '철수', 'https://example.com/profiles/chulsoo.jpg', '20-29', 'male', 'thread_001'),
+(2, 987654321, 'leeyounghee', 'hashed_password_2', 'younghee@example.com', 'KAKAO', '영희', 'https://example.com/profiles/younghee.jpg', '30-39', 'female', 'thread_002'),
+(3, NULL, 'john_doe', 'hashed_password_3', 'johndoe@example.com', 'LOCAL', 'John', 'https://example.com/profiles/john.jpg', '40-49', 'male', 'thread_003'),
+(4, 112233445, 'alice123', 'hashed_password_4', 'alice@example.com', 'KAKAO', 'Alice', 'https://example.com/profiles/alice.jpg', '20-29', 'female', 'thread_004');
+
+-- 2. 빵집 데이터 삽입
+INSERT INTO Bakery (bakery_id, name, address, latitude, longitude, phone, rating, opening_hours, keywords) VALUES
+(1, '맛있는 빵집', '서울 강남구 삼성동 123-4', 37.5172363, 127.0473248, '02-1234-5678', 4.8, '08:00 - 20:00', '["크로와상", "디저트 맛집", "주차 가능"]'),
+(2, '고소한 베이커리', '서울 마포구 합정동 56-7', 37.5509854, 126.9137021, '02-8765-4321', 4.6, '09:00 - 22:00', '["식빵", "아메리카노", "애견 동반 가능"]'),
+(3, '바삭한 크루아상', '부산 해운대구 우동 89-1', 35.1643370, 129.1633160, '051-123-4567', 4.9, '07:30 - 21:00', '["크루아상", "프렌치 베이커리", "테라스"]'),
+(4, '달콤한 케이크 하우스', '대구 수성구 범어동 77', 35.8684910, 128.5972700, '053-987-6543', 4.7, '06:00 - 19:00', '["케이크", "디저트", "무제한 리필 커피"]'),
+(5, '옛날 찹쌀 도넛', '광주 북구 용봉동 25-3', 37.5448990, 127.0551150, '02-2345-6789', 4.5, '10:00 - 20:00', '["찹쌀 도넛", "전통 베이커리", "할머니 손맛"]');
+
+-- 3. 사용자가 찜한 빵집 데이터 삽입
+INSERT INTO FavoriteBackery (user_id, bakery_id) VALUES
+(1, 1),  -- 김철수가 '맛있는 빵집' 찜
+(1, 2),  -- 김철수가 '고소한 베이커리' 찜
+(2, 3),  -- 이영희가 '바삭한 크루아상' 찜
+(2, 5),  -- 이영희가 '옛날 찹쌀 도넛' 찜
+(3, 4),  -- John이 '달콤한 케이크 하우스' 찜
+(4, 1),  -- Alice가 '맛있는 빵집' 찜
+(4, 3),  -- Alice가 '바삭한 크루아상' 찜
+(4, 5);  -- Alice가 '옛날 찹쌀 도넛' 찜
+
+-- 4. 로그인 세션 데이터 삽입
+INSERT INTO Login_Sessions (session_id, user_id, session_token, expires_at) VALUES
+(1, 1, 'session_token_1', DATE_ADD(NOW(), INTERVAL 1 DAY)),
+(2, 2, 'session_token_2', DATE_ADD(NOW(), INTERVAL 1 DAY)),
+(3, 3, 'session_token_3', DATE_ADD(NOW(), INTERVAL 1 DAY)),
+(4, 4, 'session_token_4', DATE_ADD(NOW(), INTERVAL 1 DAY));

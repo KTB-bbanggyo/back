@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/bakeries")
 public class BakeryController {
-    
+
     private final BakeryService bakeryService;
 
     public BakeryController(BakeryService bakeryService) {
