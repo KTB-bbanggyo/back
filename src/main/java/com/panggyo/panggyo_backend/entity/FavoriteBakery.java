@@ -1,23 +1,25 @@
-package main.java.com.panggyo.panggyo_backend.entity;
+package com.panggyo.panggyo_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class FavoriteBakery {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "bakery_id")
     private Bakery bakery;
 }

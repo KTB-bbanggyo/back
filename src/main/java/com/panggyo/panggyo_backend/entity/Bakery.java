@@ -1,30 +1,25 @@
-package main.java.com.panggyo.panggyo_backend.entity;
+package com.panggyo.panggyo_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Bakery {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long bakeryId;
 
     private String name;
     private String address;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
     private String phone;
-    private int rating;
-
-    @ElementCollection
-    private List<String> tags;
-
-    @OneToMany(mappedBy = "bakery", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Review> reviews;
+    private Double rating;
+    private String openingHours;
 }

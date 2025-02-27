@@ -1,18 +1,21 @@
-package main.java.com.panggyo.panggyo_backend.service;
+package com.panggyo.panggyo_backend.service;
 
 import com.panggyo.panggyo_backend.entity.Bakery;
 import com.panggyo.panggyo_backend.repository.BakeryRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class BakeryService {
+    
     private final BakeryRepository bakeryRepository;
 
-    public Optional<Bakery> getBakeryById(Long bakeryId) {
-        return bakeryRepository.findById(bakeryId);
+    public BakeryService(BakeryRepository bakeryRepository) {
+        this.bakeryRepository = bakeryRepository;
+    }
+
+    public List<Bakery> getAllBakeries() {
+        return bakeryRepository.findAll();
     }
 }
